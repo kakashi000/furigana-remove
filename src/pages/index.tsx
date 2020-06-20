@@ -12,7 +12,7 @@ import IndexLayout from '../layouts'
 
 async function handleFiles(files: File[]): Promise<void> {
   const texts = await Promise.all(files.map(file => file.text()))
-  const newTexts = texts.map(text => text.replace(/[（(][ぁ-ん]*[)）]/, ''))
+  const newTexts = texts.map(text => text.replace(/[（(][ぁ-ん]*[)）]/g, ''))
   const zip = new JSZip()
   newTexts.forEach((text, index) => {
     zip.file(files[index].name, text)
